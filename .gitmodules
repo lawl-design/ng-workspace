@@ -1,0 +1,6 @@
+[submodule "ng-submodule-1"]
+	path = ng-submodule-1
+	url = https://github.com/lawl-design/ng-submodule-1.git
+[submodule "ng-submodule-2"]
+	path = ng-submodule-2
+	url = https://github.com/lawl-design/ng-submodule-2.git
