@@ -67,7 +67,8 @@
         "serve": {
           "builder": "@angular-devkit/build-angular:dev-server",
           "options": {
-            "browserTarget": "ng-submodule-one:build"
+            "browserTarget": "ng-submodule-one:build",
+            "port": 4200
           },
           "configurations": {
             "production": {
@@ -120,6 +121,129 @@
           "configurations": {
             "production": {
               "devServerTarget": "ng-submodule-one:serve:production"
+            }
+          }
+        }
+      }
+    },
+    "ng-submodule-two": {
+      "projectType": "application",
+      "schematics": {
+        "@schematics/angular:component": {
+          "style": "scss"
+        }
+      },
+      "root": "ng-submodule-two",
+      "sourceRoot": "ng-submodule-two/src",
+      "prefix": "app",
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            "outputPath": "dist/ng-submodule-two",
+            "index": "ng-submodule-two/src/index.html",
+            "main": "ng-submodule-two/src/main.ts",
+            "polyfills": "ng-submodule-two/src/polyfills.ts",
+            "tsConfig": "ng-submodule-two/tsconfig.app.json",
+            "aot": false,
+            "assets": [
+              "ng-submodule-two/src/favicon.ico",
+              "ng-submodule-two/src/assets"
+            ],
+            "styles": [
+              "ng-submodule-two/src/styles.scss"
+            ],
+            "scripts": []
+          },
+          "configurations": {
+            "production": {
+              "fileReplacements": [
+                {
+                  "replace": "ng-submodule-two/src/environments/environment.ts",
+                  "with": "ng-submodule-two/src/environments/environment.prod.ts"
+                }
+              ],
+              "optimization": true,
+              "outputHashing": "all",
+              "sourceMap": false,
+              "extractCss": true,
+              "namedChunks": false,
+              "aot": true,
+              "extractLicenses": true,
+              "vendorChunk": false,
+              "buildOptimizer": true,
+              "budgets": [
+                {
+                  "type": "initial",
+                  "maximumWarning": "2mb",
+                  "maximumError": "5mb"
+                },
+                {
+                  "type": "anyComponentStyle",
+                  "maximumWarning": "6kb",
+                  "maximumError": "10kb"
+                }
+              ]
+            }
+          }
+        },
+        "serve": {
+          "builder": "@angular-devkit/build-angular:dev-server",
+          "options": {
+            "browserTarget": "ng-submodule-two:build",
+            "port": 4201
+          },
+          "configurations": {
+            "production": {
+              "browserTarget": "ng-submodule-two:build:production"
+            }
+          }
+        },
+        "extract-i18n": {
+          "builder": "@angular-devkit/build-angular:extract-i18n",
+          "options": {
+            "browserTarget": "ng-submodule-two:build"
+          }
+        },
+        "test": {
+          "builder": "@angular-devkit/build-angular:karma",
+          "options": {
+            "main": "ng-submodule-two/src/test.ts",
+            "polyfills": "ng-submodule-two/src/polyfills.ts",
+            "tsConfig": "ng-submodule-two/tsconfig.spec.json",
+            "karmaConfig": "ng-submodule-two/karma.conf.js",
+            "assets": [
+              "ng-submodule-two/src/favicon.ico",
+              "ng-submodule-two/src/assets"
+            ],
+            "styles": [
+              "ng-submodule-two/src/styles.scss"
+            ],
+            "scripts": []
+          }
+        },
+        "lint": {
+          "builder": "@angular-devkit/build-angular:tslint",
+          "options": {
+            "tsConfig": [
+              "ng-submodule-two/tsconfig.app.json",
+              "ng-submodule-two/tsconfig.spec.json",
+              "ng-submodule-two/e2e/tsconfig.json"
+            ],
+            "exclude": [
+              "**/node_modules/**"
+            ]
+          }
+        },
+        "e2e": {
+          "builder": "@angular-devkit/build-angular:protractor",
+          "options": {
+            "protractorConfig": "ng-submodule-two/e2e/protractor.conf.js",
+            "devServerTarget": "ng-submodule-two:serve"
+          },
+          "configurations": {
+            "production": {
+              "devServerTarget": "ng-submodule-two:serve:production"
             }
           }
         }
